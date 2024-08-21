@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class GameService {
   API_GAMES_URL: string = 'http://127.0.0.1:8000/api/games/';
   API_PLATFORMS_URL: string = 'http://127.0.0.1:8000/api/platforms/';
 

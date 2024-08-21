@@ -1,0 +1,15 @@
+.pixel-background {
+    background-image: url('Background_VideoGames.jpg');
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position: center;
+    padding: 50px;
+    text-align: center;
+}
+
+.text-center{
+    font-size: 5em;
+    text-align: center;
+    color: azure;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+}
