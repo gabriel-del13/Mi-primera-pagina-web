@@ -35,7 +35,12 @@
                             </span>
                         </td>
                         <td>
-                            <li> {{item.platforms}}</li>
+                            <ul class= "horizontal-list">
+                                @for (platform of item.platforms; track $index){
+                                    <li> {{platform.name}}</li>
+                                }
+                            </ul>
+
                         </td>
                         <td>
                             <img width="50" height="60" src="{{item.image}}" alt="game">
