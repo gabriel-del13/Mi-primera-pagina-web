@@ -4,7 +4,7 @@ from .models import Platform, Game, Stock
 class PlatformSerializer(serializers.ModelSerializer):
     class Meta:
         model = Platform
-        fields = '__all__'
+        fields = ['id', 'name', 'icon']
 
 class GameSerializer(serializers.ModelSerializer):
     platforms = PlatformSerializer(many=True, read_only=True)

@@ -1,58 +1,36 @@
-
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Videogames List</title>
     <link rel="stylesheet" href="games.component.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body> 
-    <div style="padding: 50px;">
+    <div class="container">
         <div class="pixel-background">
             <h1 class="text-center">Videogames List</h1>
         </div>
-        <table class="table table-hover">
-            <thead class="table-danger">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">title</th>
-                    <th scope="col">genre</th>
-                    <th scope="col">release date</th>
-                    <th scope="col">price</th>
-                    <th scope="col">platforms</th>
-                    <th scope="col">image</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (item of games; track $index) {
-                    <tr> 
-                        <td>{{ $index +1 }} </td> 
-                        <td>{{item.formatted_id}}</td>
-                        <td> {{item.title}}</td>
-                        <td>{{item.genre}}</td>
-                        <td>{{item.release_date}}</td>
-                        <td>
-                            <span class ="badge bg-success">
-                                {{item.price}}
-                            </span>
-                        </td>
-                        <td>
-                            <ul class= "horizontal-list">
-                                @for (platform of item.platforms; track $index){
-                                    <li> {{platform.name}}</li>
-                                }
-                            </ul>
-
-                        </td>
-                        <td>
-                            <img width="50" height="60" src="{{item.image}}" alt="game">
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
+        <div class="game-grid">
+            @for (item of games; track $index) {
+                <div class="game-card">
+                    <h2 class="game-title">{{item.title}}</h2>
+                    <img class="game-image" src="{{item.image}}" alt="{{item.title}}">
+                    <div class="game-info">
+                        <p class="game-genre">Genre: {{item.genre}}</p>
+                        <p class="game-price">Price: <span class="badge bg-success">{{item.price}}</span></p>
+                    </div>
+                    <div class="game-platforms">
+                        <p>Available on:</p>
+                        <ul class="horizontal-list">
+                            @for (platform of item.platforms; track $index){
+                              <li>
+                                <img class="platform-image" src="{{platform.icon}}" alt="{{platform.name}}">
+                              </li>
+                            }
+                          </ul>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </body>
-
-
