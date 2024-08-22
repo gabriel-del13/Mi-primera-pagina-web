@@ -11,10 +11,14 @@ class GameSerializer(serializers.ModelSerializer):
     platform_ids = serializers.PrimaryKeyRelatedField(
         many=True, queryset=Platform.objects.all(), source='platforms', write_only=True
     )
+    formatted_id = serializers.SerializerMethodField()
 
     class Meta:
         model = Game
-        fields = ['id', 'title', 'genre', 'release_date', 'price', 'platforms', 'platform_ids', 'image']
+        fields = ['id', 'formatted_id', 'title', 'genre', 'release_date', 'price', 'platforms', 'platform_ids', 'image']
+    
+    def get_formatted_id(self,obj):
+        return f"{obj.id:04d}"
 
 class StockSerializer(serializers.ModelSerializer):
     game_id = serializers.PrimaryKeyRelatedField(

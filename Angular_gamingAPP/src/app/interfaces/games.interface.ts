@@ -3,7 +3,7 @@ export interface PlatformsInterface{
     name: string;
 }
 export interface GameInterface{
-    id: number;
+    formatted_id: number;
     title: string;
     genre: string;
     release_date: Date;
