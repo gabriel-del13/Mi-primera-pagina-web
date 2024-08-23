@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { GameInterface } from '../interfaces/games.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class GameService {
   getPlatforms(): Observable<any> {
 
     return this.Http.get(this.API_PLATFORMS_URL);
+  }
+
+  getGameById(id: number): Observable<GameInterface> {
+    return this.Http.get<GameInterface>(`${this.API_GAMES_URL}/games/${id}`);
   }
 }

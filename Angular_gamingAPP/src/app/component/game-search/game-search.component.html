@@ -1,6 +1,6 @@
 <div class="container">
     <div class="pixel-background">
-        <h1 class="text-center">Videogames List</h1>
+        <h1 class="text-center">Search Results</h1>
     </div>
     <div class="search-bar">
         <form (ngSubmit)="onSearch()">
@@ -9,20 +9,20 @@
         </form>
     </div>
     <div class="game-grid">
-        @for (item of paginatedGames; track $index) {
+        @for (game of paginatedSearchResults; track $index) {
             <div class="game-card">
-                <h2 class="game-title">{{item.title}}</h2>
-                <img class="game-image" [src]="item.image" [alt]="item.title">
+                <h2 class="game-title">{{game.title}}</h2>
+                <img class="game-image" [src]="game.image" [alt]="game.title">
                 <div class="game-info">
-                    <p class="game-genre">Genre: {{item.genre}}</p>
-                    <p class="game-price">Price: <span class="badge bg-success">{{item.price | price}}</span></p>
+                    <p class="game-genre">Genre: {{game.genre}}</p>
+                    <p class="game-price">Price: <span class="badge bg-success">{{game.price | price}}</span></p>
                 </div>
                 <div class="game-platforms">
                     <p>Available on:</p>
                     <ul class="horizontal-list">
-                        @for (platform of item.platforms; track $index){
+                        @for (platform of game.platforms; track $index) {
                             <li>
-                            <img class="platform-image" [src]="platform.icon" [alt]="platform.name">
+                                <img class="platform-image" [src]="platform.icon" [alt]="platform.name">
                             </li>
                         }
                     </ul>
@@ -30,6 +30,9 @@
             </div>
         }
     </div>
+    @if (searchResults.length === 0) {
+        <p>No games found matching "{{ searchTerm }}"</p>
+    }
     <div class="pagination">
         @for (page of [].constructor(totalPages); track $index) {
             <button (click)="onPageChange($index + 1)" [class.active]="currentPage === $index + 1">
