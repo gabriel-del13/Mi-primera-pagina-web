@@ -69,13 +69,18 @@ export class GameSearchComponent implements OnInit {
     this.currentPage = page;
   }
 
-  onSearch() {
-    this.router.navigate(['/search'], { queryParams: { term: this.searchTerm } });
-    this.searchGames();
-  }
-
   goBack() {
+    localStorage.removeItem('lastSearchTerm');
     const lastPage = localStorage.getItem('lastGamesPage') || '1';
     this.router.navigate(['/games', lastPage]);
   }
+
+  onSearch() {
+    localStorage.setItem('lastSearchTerm', this.searchTerm);
+    this.router.navigate(['/search'], { queryParams: { term: this.searchTerm } });
+    this.searchGames();
+  }
+  
+
+
 }

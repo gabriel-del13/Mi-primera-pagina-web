@@ -27,6 +27,7 @@ export class GamesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.route.params.subscribe(params => {
       this.currentPage = +params['page'] || 1;
       localStorage.setItem('lastGamesPage', this.currentPage.toString());
@@ -56,6 +57,7 @@ export class GamesComponent implements OnInit {
   }
 
   onSearch() {
+    localStorage.setItem('lastSearchTerm', this.searchTerm);
     this.router.navigate(['/search'], { queryParams: { term: this.searchTerm } });
   }
 }
