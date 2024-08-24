@@ -16,7 +16,7 @@ import { PricePipe } from '../../pipes/price.pipe';
 export class GameSearchComponent implements OnInit {
   searchResults: GameInterface[] = [];
   searchTerm: string = '';
-  pageSize: number = 10;
+  pageSize: number = 12;
   currentPage: number = 1;
   totalPages: number = 0;
   noResultsFound: boolean = false;
