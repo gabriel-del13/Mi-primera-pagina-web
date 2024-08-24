@@ -9,6 +9,7 @@ class Platform(models.Model):
 class Game(models.Model):
     title = models.CharField(max_length=255)
     genre = models.CharField(max_length=50)
+    description = models.CharField(max_length=300, null= True)
     release_date = models.DateField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     platforms = models.ManyToManyField(Platform)

@@ -15,7 +15,7 @@ class GameSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Game
-        fields = ['id', 'formatted_id', 'title', 'genre', 'release_date', 'price', 'platforms', 'platform_ids', 'image']
+        fields = ['id', 'formatted_id', 'title', 'genre','description', 'release_date', 'price', 'platforms', 'platform_ids', 'image']
     
     def get_formatted_id(self,obj):
         return f"{obj.id:04d}"
