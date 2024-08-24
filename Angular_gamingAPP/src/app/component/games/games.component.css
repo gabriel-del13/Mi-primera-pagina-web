@@ -34,6 +34,18 @@
     height: 100%; 
 }
 
+.game-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.game-card-link:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
 .game-title {
     font-size: 1.5em;
     margin-bottom: 10px;

@@ -24,6 +24,7 @@ export class GameService {
   }
 
   getGameById(id: number): Observable<GameInterface> {
-    return this.Http.get<GameInterface>(`${this.API_GAMES_URL}/games/${id}`);
+    return this.Http.get<GameInterface>(`${this.API_GAMES_URL}${id}`);
   }
+
 }

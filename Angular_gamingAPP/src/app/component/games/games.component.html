@@ -10,24 +10,26 @@
     </div>
     <div class="game-grid">
         @for (item of paginatedGames; track $index) {
-            <div class="game-card">
-                <h2 class="game-title">{{item.title}}</h2>
-                <img class="game-image" [src]="item.image" [alt]="item.title">
-                <div class="game-info">
-                    <p class="game-genre">Genre: {{item.genre}}</p>
-                    <p class="game-price">Price: <span class="badge bg-success">{{item.price | price}}</span></p>
+            <a [routerLink]="['/game', item.formatted_id, item.title]" class="game-card-link">
+                <div class="game-card">
+                    <h2 class="game-title">{{item.title}}</h2>
+                    <img class="game-image" [src]="item.image" [alt]="item.title">
+                        <div class="game-info">
+                        <p class="game-genre">Genre: {{item.genre}}</p>
+                        <p class="game-price">Price: <span class="badge bg-success">{{item.price | price}}</span></p>
+                    </div>
+                    <div class="game-platforms">
+                        <p>Available on:</p>
+                        <ul class="horizontal-list">
+                            @for (platform of item.platforms; track $index){
+                                <li>
+                                <img class="platform-image" [src]="platform.icon" [alt]="platform.name">
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
-                <div class="game-platforms">
-                    <p>Available on:</p>
-                    <ul class="horizontal-list">
-                        @for (platform of item.platforms; track $index){
-                            <li>
-                            <img class="platform-image" [src]="platform.icon" [alt]="platform.name">
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
+            </a>
         }
     </div>
     <div class="pagination">

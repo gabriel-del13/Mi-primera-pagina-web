@@ -8,5 +8,5 @@ export const routes: Routes = [
   { path: 'games', redirectTo: '/games/1', pathMatch: 'full' },
   { path: 'games/:page', component: GamesComponent },
   { path: 'search', component: GameSearchComponent },
-  { path: 'game-detail', component: GameDetailComponent },
+  { path: 'game/:id/:title', component: GameDetailComponent}
 ];

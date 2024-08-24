@@ -1,1 +1,40 @@
-<p>game-detail works!</p>
+<div class="container">
+    <div class="pixel-background">
+        <h1 class="text-center">Game Details</h1>
+    </div>
+    <div class="search-container">
+        <button (click)="goBack()" class="btn btn-secondary mb-3">Regresar</button>
+        <div class="search-bar">
+            <form (ngSubmit)="onSearch()">
+                <input type="text" [(ngModel)]="searchTerm" name="search" placeholder="Search games...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    @if (game) {
+        <div class="game-detail-container">
+            <div class="row game-grid">
+                <div class="col-md-4">
+                    <img [src]="game.image" [alt]="game.title" class="img-fluid game-image">
+                </div>
+                <div class="col-md-8">
+                    <h1 class="game-title">{{game.title}}</h1>
+                    <p><strong>Release Date:</strong> {{game.release_date | date:'longDate'}}</p>
+                    <p><strong>Genre:</strong> {{game.genre}}</p>
+                    <p><strong>Price:</strong> <span class="badge bg-success">{{game.price | price}}</span></p>
+                    
+                    <div class="game-platforms">
+                        <p class="platforms-header"><strong>Available on:</strong></p>
+                        <ul class="horizontal-list">
+                            @for (platform of game.platforms; track $index) {
+                                <li>
+                                    <img class="platform-image" [src]="platform.icon" [alt]="platform.name">
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

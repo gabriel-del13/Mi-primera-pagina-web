@@ -2,42 +2,48 @@
     <div class="pixel-background">
         <h1 class="text-center">Search Results</h1>
     </div>
-    <div class="search-bar">
-        <form (ngSubmit)="onSearch()">
-            <input type="text" [(ngModel)]="searchTerm" name="search" placeholder="Search games...">
-            <button type="submit">Search</button>
-        </form>
+    <div class="search-container">
+        <button (click)="goBack()" class="btn btn-secondary mb-3">Regresar</button>
+        <div class="search-bar">
+            <form (ngSubmit)="onSearch()">
+                <input type="text" [(ngModel)]="searchTerm" name="search" placeholder="Search games...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
     </div>
-    <div class="game-grid">
-        @for (game of paginatedSearchResults; track $index) {
-            <div class="game-card">
-                <h2 class="game-title">{{game.title}}</h2>
-                <img class="game-image" [src]="game.image" [alt]="game.title">
-                <div class="game-info">
-                    <p class="game-genre">Genre: {{game.genre}}</p>
-                    <p class="game-price">Price: <span class="badge bg-success">{{game.price | price}}</span></p>
-                </div>
-                <div class="game-platforms">
-                    <p>Available on:</p>
-                    <ul class="horizontal-list">
-                        @for (platform of game.platforms; track $index) {
-                            <li>
-                                <img class="platform-image" [src]="platform.icon" [alt]="platform.name">
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        }
-    </div>
-    @if (searchResults.length === 0) {
-        <p>No games found matching "{{ searchTerm }}"</p>
+    @if (noResultsFound) {
+        <p>No se encontraron juegos que coincidan con "{{ lastSearchTerm }}"</p>
+    } @else if (searchResults.length > 0) {
+        <div class="game-grid">
+            @for (game of paginatedSearchResults; track $index) {
+                <a [routerLink]="['/game', game.formatted_id, game.title]" class="game-card-link">
+                    <div class="game-card">
+                        <h2 class="game-title">{{game.title}}</h2>
+                        <img class="game-image" [src]="game.image" [alt]="game.title">
+                        <div class="game-info">
+                            <p class="game-genre">Genre: {{game.genre}}</p>
+                            <p class="game-price">Price: <span class="badge bg-success">{{game.price | price}}</span></p>
+                        </div>
+                        <div class="game-platforms">
+                            <p>Available on:</p>
+                            <ul class="horizontal-list">
+                                @for (platform of game.platforms; track $index) {
+                                    <li>
+                                        <img class="platform-image" [src]="platform.icon" [alt]="platform.name">
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+        <div class="pagination">
+            @for (page of [].constructor(totalPages); track $index) {
+                <button (click)="onPageChange($index + 1)" [class.active]="currentPage === $index + 1">
+                    {{ $index + 1 }}
+                </button>
+            }
+        </div>
     }
-    <div class="pagination">
-        @for (page of [].constructor(totalPages); track $index) {
-            <button (click)="onPageChange($index + 1)" [class.active]="currentPage === $index + 1">
-                {{ $index + 1 }}
-            </button>
-        }
-    </div>
 </div>

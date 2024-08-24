@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { GameService } from '../../services/games.service';
 import { GameInterface } from '../../interfaces/games.interface';
 import { PricePipe } from '../../pipes/price.pipe';
+
 @Component({
   selector: 'app-games',
   standalone: true,
-  imports: [CommonModule, FormsModule, PricePipe],
+  imports: [CommonModule, FormsModule, PricePipe, RouterLink],
   templateUrl: './games.component.html',
   styleUrl: './games.component.css'
 })
@@ -28,6 +29,7 @@ export class GamesComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.currentPage = +params['page'] || 1;
+      localStorage.setItem('lastGamesPage', this.currentPage.toString());
       this.getGames();
     });
   }
