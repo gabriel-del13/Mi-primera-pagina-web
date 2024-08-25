@@ -132,3 +132,31 @@
   .search-bar button:hover {
     background-color: #0056b3;
   }
+
+  .pagination {
+    display: flex;
+    justify-content: center; 
+    margin-top: 20px;
+    margin-bottom: 20px; 
+}
+
+.pagination button {
+    padding: 10px 20px; 
+    font-size: 1.2rem; 
+    margin: 0 5px; 
+    border: none; 
+    border-radius: 5px;
+    background-color: #000000; 
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+.pagination button.active {
+    background-color: #28a745; 
+}
+

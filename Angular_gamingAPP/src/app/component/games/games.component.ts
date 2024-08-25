@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { GameService } from '../../services/games.service';
-import { GameInterface } from '../../interfaces/games.interface';
+import { GameInterface, PlatformsInterface } from '../../interfaces/games.interface';
 import { PricePipe } from '../../pipes/price.pipe';
 
 @Component({
@@ -15,10 +15,13 @@ import { PricePipe } from '../../pipes/price.pipe';
 })
 export class GamesComponent implements OnInit {
   games: GameInterface[] = [];
+  filteredGames: GameInterface[] = [];
+  platforms: PlatformsInterface[] = [];
   pageSize: number = 12;
   currentPage: number = 1;
   totalPages: number = 0;
   searchTerm: string = '';
+  selectedPlatform: string = '';
 
   constructor(
     private gameService: GameService,
@@ -32,6 +35,7 @@ export class GamesComponent implements OnInit {
       this.currentPage = +params['page'] || 1;
       localStorage.setItem('lastGamesPage', this.currentPage.toString());
       this.getGames();
+      this.getPlatforms();
     });
   }
 
@@ -59,5 +63,25 @@ export class GamesComponent implements OnInit {
   onSearch() {
     localStorage.setItem('lastSearchTerm', this.searchTerm);
     this.router.navigate(['/search'], { queryParams: { term: this.searchTerm } });
+  }
+
+
+  getPlatforms() {
+    this.gameService.getPlatforms().subscribe({
+      next: (result: PlatformsInterface[]) => {
+        this.platforms = result;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  applyFilter() {
+    if (this.selectedPlatform) {
+      this.router.navigate(['/filtered-games'], { 
+        queryParams: { platform: this.selectedPlatform } 
+      });
+    }
   }
 }

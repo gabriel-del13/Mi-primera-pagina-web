@@ -4,8 +4,27 @@
     </div>
     <div class="search-bar">
         <form (ngSubmit)="onSearch()">
-            <input type="text" [(ngModel)]="searchTerm" name="search" placeholder="Search games...">
-            <button type="submit">Search</button>
+            <div class="search-container">
+                <div class="dropdown">
+                    <button type="button" class="dropdown-btn">Menu</button>
+                    <div class="dropdown-content">
+                        <a href="#">Our Company</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Catalogue</a>
+                    </div>
+                </div>
+                <input type="text" [(ngModel)]="searchTerm" name="search" placeholder="Search games...">
+                <button type="submit">Search</button>
+                <div class="filter-group">
+                    <select [(ngModel)]="selectedPlatform" name="platform" >
+                        <option value="">All Platforms</option>
+                        <option *ngFor="let platform of platforms" [value]="platform.name">
+                            {{platform.name}}
+                        </option>
+                    </select>
+                    <button type="button" (click)="applyFilter()">Filter</button>
+                </div>
+            </div>
         </form>
     </div>
     <div class="game-grid">

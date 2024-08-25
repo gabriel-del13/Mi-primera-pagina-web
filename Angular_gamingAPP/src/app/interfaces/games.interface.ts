@@ -1,7 +1,7 @@
 export interface PlatformsInterface{
     id: number; 
     name: string;
-    icon:string;
+    icon: string;
 }
 export interface GameInterface{
     formatted_id: number;
